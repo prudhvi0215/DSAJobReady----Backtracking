@@ -1,0 +1,95 @@
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+
+
+Example 1:
+
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+Example 2:
+
+Input: digits = ""
+Output: []
+Example 3:
+
+Input: digits = "2"
+Output: ["a","b","c"]
+ 
+
+Constraints:
+
+0 <= digits.length <= 4
+digits[i] is a digit in the range ['2', '9'].
+
+
+
+CODE:
+
+
+class Solution {
+public:
+    
+    vector<string> letterCombinationsHelper(string digits,unordered_map<char,string> &phoneBook,char startChar)
+    {
+        if(digits.size()==0){
+            vector<string> ans;
+            return ans;
+        }
+        
+        vector<string> Combinations = letterCombinationsHelper(digits.substr(1),phoneBook,digits[1]);
+        
+        string Word = phoneBook[startChar];
+        
+        int k=0;
+        
+        vector<string> result;
+        
+        while(k<Word.size())
+        {
+            if(Combinations.size()==0){
+                string letter;
+                letter+=Word[k];
+                result.push_back(letter);
+            } else {
+    
+                int z=0;
+                while(z<Combinations.size())
+                {
+                    string pair = Word[k]+Combinations[z];
+                    result.push_back(pair);
+                    z++;
+                }
+            }
+            
+            k++;
+        }
+        
+        return result;
+    }
+    
+    
+    vector<string> letterCombinations(string digits) {
+        
+        if(digits.size()==0){
+            vector<string> ans;
+            return ans;
+        }
+        
+        unordered_map<char,string> phoneBook;
+        
+        phoneBook['2'] = "abc";
+        phoneBook['3'] = "def";
+        phoneBook['4'] = "ghi";
+        
+        phoneBook['5'] = "jkl";
+        phoneBook['6'] = "mno";
+        phoneBook['7'] = "pqrs";
+        
+        phoneBook['8'] = "tuv";
+        phoneBook['9'] = "wxyz";        
+        
+        return letterCombinationsHelper(digits,phoneBook,digits[0]);
+    }
+};
