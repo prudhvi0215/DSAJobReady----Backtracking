@@ -1,0 +1,73 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+void insert(vector<int> &vec,int ele)
+{
+    //Base case
+    if(vec.size()==0 || vec[vec.size()-1]<=ele){
+        vec.push_back(ele);
+        return;
+    }
+    
+    int temp = vec[vec.size()-1];
+    vec.pop_back();
+    
+    insert(vec,ele);
+    
+    vec.push_back(temp);
+    
+    return;
+}
+
+
+void sort(vector<int> &vec)
+{
+    //Base Case
+    if(vec.size()==1){
+        return;
+    }
+    
+    int ele = vec[vec.size()-1];
+    vec.pop_back();
+    
+    //Hypothesis
+    sort(vec);
+    
+    //Induction
+    insert(vec,ele);
+    
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    
+    int n;
+    cout<<"Enter Size: "<<"\n";
+    cin>>n;
+    
+    vector<int> vec;
+    
+    for(int i=0;i<n;i++){
+        
+        int element;
+        cout<<"Enter "<<i<<" th index value: "<<"\n";
+        cin>>element;
+        
+        vec.push_back(element);
+    }
+    
+    sort(vec);
+    
+    //Output
+    for(int i=0;i<vec.size();i++)
+    {
+        cout<<vec[i]<<" ";
+    }
+
+    return 0;
+}
