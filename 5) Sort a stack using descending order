@@ -1,0 +1,77 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+void insert(stack<int> &stk,int ele)
+{
+    //Base case
+    if(stk.size()==0 || stk.top()>=ele){
+        stk.push(ele);
+        return;
+    }
+    
+    int temp = stk.top();
+    stk.pop();
+    
+    insert(stk,ele);
+    
+    stk.push(temp);
+    
+    return;
+}
+
+
+void sort(stack<int> &stk)
+{
+    //Base Case
+    if(stk.size()==1){
+        return;
+    }
+    
+    int ele = stk.top();
+    stk.pop();
+    
+    //Hypothesis
+    sort(stk);
+    
+    //Induction
+    insert(stk,ele);
+    
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    
+    int n;
+    cout<<"Enter Size: "<<"\n";
+    cin>>n;
+    
+    stack<int> stk;
+    
+    for(int i=0;i<n;i++){
+        
+        int element;
+        cout<<"Enter "<<i<<" th index value: "<<"\n";
+        cin>>element;
+        
+        stk.push(element);
+    }
+    
+    sort(stk);
+    
+    cout<<"\n";
+    
+    
+    //Output
+    while(!stk.empty())
+    {
+        cout<<stk.top()<<" ";
+        stk.pop();
+    }
+
+    return 0;
+}
