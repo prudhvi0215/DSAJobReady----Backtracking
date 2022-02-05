@@ -1,0 +1,71 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void insert(stack<int> &stk,int temp)
+{
+    if(stk.size()==0){
+        stk.push(temp);
+        return;
+    }
+    
+    int ele = stk.top();
+    stk.pop();
+    
+    insert(stk,temp);
+    
+    stk.push(ele);
+    
+    return;
+}
+
+
+void reverse(stack<int> &stk)
+{
+    if(stk.size()==1){
+        return;
+    }
+    
+    int ele = stk.top();
+    stk.pop();
+    
+    reverse(stk);
+    
+    insert(stk,ele);
+    
+    return;
+}
+
+//Kth symbol in grammer
+int main() {
+    // Write C++ code here
+    int n;
+    cin>>n;
+    
+    stack<int> stk;
+    
+    for(int i=0;i<n;i++)
+    {
+        int ele;
+        cout<<"Enter ele: "<<"\n";
+        cin>>ele;
+        
+        stk.push(ele);
+    }
+    
+    reverse(stk);
+    
+    cout<<"\n";
+    
+    //Output
+    
+    while(!stk.empty())
+    {
+        cout<<stk.top()<<" ";
+        stk.pop();
+    }
+    
+    
+    return 0;
+}
