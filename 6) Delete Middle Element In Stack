@@ -1,0 +1,52 @@
+void deleteMiddle(stack<int> &stk,int k)
+{
+    if(k==1){
+        stk.pop();
+        return;
+    }
+    
+    int ele = stk.top();
+    stk.pop();
+    
+    deleteMiddle(stk,k-1);
+    
+    stk.push(ele);
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    
+    int n;
+    cout<<"Enter Size: "<<"\n";
+    cin>>n;
+    
+    stack<int> stk;
+    
+    for(int i=0;i<n;i++){
+        
+        int element;
+        cout<<"Enter "<<i<<" th index value: "<<"\n";
+        cin>>element;
+        
+        stk.push(element);
+    }
+    
+    int k = (stk.size()/2) + 1;
+    
+    deleteMiddle(stk,k);
+    
+    
+    cout<<"\n";
+    
+    
+    //Output
+    while(!stk.empty())
+    {
+        cout<<stk.top()<<" ";
+        stk.pop();
+    }
+
+    return 0;
+}
