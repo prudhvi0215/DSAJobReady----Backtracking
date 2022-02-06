@@ -1,0 +1,45 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+void permutationProblem(string Inp,string Outp)
+{
+    //Base Case
+    if(Inp.length()==0)
+    {
+        cout<<Outp<<"\n";
+        return;
+    }
+    
+    string Outp1 = Outp;
+    string Outp2 = Outp;
+    
+    Outp1.push_back(' ');
+    Outp1.push_back(Inp[0]);
+    Outp2.push_back(Inp[0]);
+    
+    Inp.erase(Inp.begin()+0);
+    
+    
+    permutationProblem(Inp,Outp1);
+    permutationProblem(Inp,Outp2);
+    
+    return;
+}
+
+int main() {
+    // Write C++ code here
+    string Inp;
+    cin>>Inp;
+    
+    string Outp = "";
+    Outp+=Inp[0];
+    
+    Inp.erase(Inp.begin()+0);
+    
+    permutationProblem(Inp,Outp);
+    
+    return 0;
+}
