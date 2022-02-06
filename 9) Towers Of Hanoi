@@ -1,0 +1,44 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+void solveTOH(int s,int d,int h,int n,int &steps)
+{
+    ++steps;
+    
+    //Base case
+    if(n==1){
+        cout<<"Moving disk from "<<s<<" to "<<d<<" rod"<<"\n";
+        return;
+    }
+    
+    solveTOH(s,h,d,n-1,steps);
+    
+    cout<<"Moving disk from "<<s<<" to "<<d<<" rod"<<"\n";
+    
+    solveTOH(h,d,s,n-1,steps);
+    
+    return;
+}
+
+int main() {
+    // Write C++ code here
+    int n;
+    cout<<"Enter No. of disks: "<<"\n";
+    cin>>n;
+    
+    int s = 1;
+    int h = 2;
+    int d = 3;
+    int countOfSteps = 0;
+    
+    solveTOH(s,d,h,n,countOfSteps);
+    
+    cout<<"\n";
+    
+    cout<<"Number of steps to solve: "<<countOfSteps;
+
+    return 0;
+}
