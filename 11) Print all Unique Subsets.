@@ -1,0 +1,44 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void printUniqueSubsets(string Inp,string Outp,unordered_set<string> &uniqueSubsets)
+{
+    //Base case
+    if(Inp.length()==0){
+        uniqueSubsets.insert(Outp);
+        return;
+    }
+    
+    string Op1 = Outp;
+    string Op2 = Outp + Inp[0];
+    
+    Inp.erase(Inp.begin()+0);
+    
+    printSubsets(Inp,Op1,uniqueSubsets);
+    printSubsets(Inp,Op2,uniqueSubsets);
+    
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    string Inp;
+    cin>>Inp;
+    
+    string Outp = "";
+    unordered_set<string> uniqueSubsets;
+    
+    printUniqueSubsets(Inp,Outp,uniqueSubsets);
+    
+    unordered_set<string> :: iterator itr;
+    
+    for(itr=uniqueSubsets.begin();itr!=uniqueSubsets.end();itr++)
+    {
+        cout<<(*itr)<<"\n";
+    }
+    
+    return 0;
+}
