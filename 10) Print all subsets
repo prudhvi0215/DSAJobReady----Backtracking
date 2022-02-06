@@ -1,0 +1,35 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void printSubsets(string Inp,string Outp)
+{
+    //Base case
+    if(Inp.length()==0){
+        cout<<Outp<<"\n";
+        return;
+    }
+    
+    string Op1 = Outp;
+    string Op2 = Outp + Inp[0];
+    
+    Inp.erase(Inp.begin()+0);
+    
+    printSubsets(Inp,Op1);
+    printSubsets(Inp,Op2);
+    
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    string Inp;
+    cin>>Inp;
+    
+    string Outp = "";
+    printSubsets(Inp,Outp);
+
+    return 0;
+}
