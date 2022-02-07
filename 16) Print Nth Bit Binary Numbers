@@ -1,0 +1,63 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void NthBinaryHelper(int n,int ones, int zeros,string Outp,vector<string> &result)
+{
+    //Base case
+    if(n==0)
+    {
+        result.push_back(Outp);
+        return;
+    }
+    
+    if(ones==zeros){
+        string Outp1 = Outp;
+        Outp1.push_back('1');
+        
+        NthBinaryHelper(n-1,ones+1,zeros,Outp1,result);
+    } else{
+        string Outp1 = Outp;
+        string Outp2 = Outp;
+        
+        Outp1.push_back('1');
+        Outp2.push_back('0');
+        
+        NthBinaryHelper(n-1,ones+1,zeros,Outp1,result);
+        NthBinaryHelper(n-1,ones,zeros+1,Outp2,result);
+    }
+    
+    return;
+}
+
+vector<string> NthBinary(int n)
+{
+    int ones = 0;
+    int zeros = 0;
+    
+    vector<string> result;
+    
+    string Outp = "";
+    
+    NthBinaryHelper(n,ones,zeros,Outp,result);
+    
+    return result;
+}
+
+
+int main() {
+    // Write C++ code here
+    int n;
+    cout<<"Enter n: "<<"\n";
+    cin>>n;
+    
+    vector<string> ans = NthBinary(n);
+    
+    for(int i=0;i<ans.size();i++){
+        cout<<ans[i]<<"\n";
+    }
+    
+
+    return 0;
+}
