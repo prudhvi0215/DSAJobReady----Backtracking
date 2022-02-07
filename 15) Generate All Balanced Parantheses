@@ -1,0 +1,62 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+void GenerateBPHelper(int open,int close,string Outp,vector<string> &Output)
+{
+    //Base case
+    if(open==0 && close==0){
+        Output.push_back(Outp);
+        return;
+    }
+    
+    if(open!=0)
+    {
+        string Outp1 = Outp;
+        Outp1.push_back('(');
+        
+        GenerateBPHelper(open-1,close,Outp1,Output);
+    }
+    
+    if(close>open)
+    {
+        string Outp1 = Outp;
+        Outp1.push_back(')');
+        
+        GenerateBPHelper(open,close-1,Outp1,Output);
+    }
+    
+    return;
+}
+
+vector<string> GenerateBP(int n)
+{
+    int open = n;
+    int close = n;
+    
+    vector<string> Output;
+    
+    string Outp = "";
+    
+    GenerateBPHelper(open,close,Outp,Output);
+    
+    return Output;
+}
+
+int main() {
+    // Write C++ code here
+    int n;
+    cout<<"Enter n: "<<"\n";
+    cin>>n;
+    
+    vector<string> BalancedParantheses = GenerateBP(n);
+    
+    for(int i=0;i<BalancedParantheses.size();i++){
+        cout<<BalancedParantheses[i]<<"\n";
+    }
+    
+
+    return 0;
+}
