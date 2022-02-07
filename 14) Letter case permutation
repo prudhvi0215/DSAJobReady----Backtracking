@@ -1,0 +1,65 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void PermutationHelper(string Inp,string Outp,vector<string> &result)
+{
+    //Base case
+    if(Inp.length()==0){
+        result.push_back(Outp);
+        return;
+    }
+    
+    
+    if(isalpha(Inp[0]))
+    {
+        string Outp1 = Outp;
+        string Outp2 = Outp;
+        
+        Outp1.push_back(tolower(Inp[0]));
+        Outp2.push_back(toupper(Inp[0]));
+        
+        Inp.erase(Inp.begin()+0);
+        
+        PermutationHelper(Inp,Outp1,result);
+        PermutationHelper(Inp,Outp2,result);
+    } else {
+        string Output = Outp;
+        
+        Output.push_back(Inp[0]);
+        
+        Inp.erase(Inp.begin()+0);
+        
+        PermutationHelper(Inp,Output,result);
+    }
+    
+    return;
+}
+
+vector<string> LetterCasePermutation(string Inp,string Outp)
+{
+    vector<string> result;
+    
+    PermutationHelper(Inp,Outp,result);
+    
+    return result;
+}
+
+
+int main() {
+    // Write C++ code here
+    string Inp;
+    cin>>Inp;
+    
+    string Outp="";
+    
+    vector<string> permutations = LetterCasePermutation(Inp,Outp);
+    
+    for(int i=0;i<permutations.size();i++){
+        cout<<permutations[i]<<"\n";
+    }
+    
+
+    return 0;
+}
