@@ -1,0 +1,46 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void josephusProblem(vector<int> persons,int n,int k,int index,int &ans)
+{
+    //Base case
+    if(persons.size()==1){
+        ans = persons[0];
+        return;
+    }
+    
+    int indx = ((index+k) % persons.size());
+    
+    persons.erase(persons.begin()+indx);
+    
+    josephusProblem(persons,n,k,indx,ans);
+    
+    return;
+}
+
+
+
+int main() {
+    // Write C++ code here
+    int n,k;
+    cin>>n>>k;
+    
+    vector<int> persons;
+    
+    for(int i=1;i<=n;i++){
+        persons.push_back(i);
+    }
+    
+    int ans = -1;
+    
+    k = k-1; //for proper index movement
+    
+    josephusProblem(persons,n,k,0,ans);
+    
+    cout<<ans;
+
+
+    return 0;
+}
