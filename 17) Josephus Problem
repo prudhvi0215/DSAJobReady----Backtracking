@@ -15,7 +15,12 @@ void josephusProblem(vector<int> persons,int n,int k,int index,int &ans)
     
     persons.erase(persons.begin()+indx);
     
+    //Hypothesis
     josephusProblem(persons,n,k,indx,ans);
+    
+    //Induction
+    
+    //NO INDUCTION STEP
     
     return;
 }
