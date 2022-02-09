@@ -1,0 +1,31 @@
+class Solution {
+public:
+    
+    void subsetHelper(vector<int> &nums,int index,vector<int> result,vector<vector<int>> &finalResult)
+    {
+        //Base case
+        if(index==nums.size()){
+            finalResult.push_back(result);
+            return;
+        }
+        
+        vector<int> result1 = result;
+        vector<int> result2 = result;
+        
+        result1.push_back(nums[index]);
+        
+        subsetHelper(nums,index+1,result1,finalResult);
+        subsetHelper(nums,index+1,result2,finalResult);
+        
+        return;
+    }
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> finalResult;
+        vector<int> result;
+        
+        subsetHelper(nums,0,result,finalResult);
+        
+        return finalResult;
+    }
+};
