@@ -1,0 +1,74 @@
+class Solution {
+public:
+    
+    bool validPoint(int x,int y,int m,int n){
+        return (x>=0 && x<m && y>=0 && y<n);
+    }
+    
+    
+    
+    void wordSearchRecur(vector<vector<char>> &board,string word,int X,int Y,int prevX,int prevY,int m,int n, bool &exists,vector<vector<bool>> &visited)
+    {
+        visited[X][Y] = true;
+        
+        if(word.length()==0){
+            exists = true;
+            return;
+        }
+        
+        int dx[] = {1,-1,0,0};
+        int dy[] = {0,0,1,-1};
+        
+        for(int i=0;i<4;i++)
+        {
+            int newX = X + dx[i];
+            int newY = Y + dy[i];
+            
+            if(newX==prevX && newY == prevY){
+                continue;
+            }
+            
+            if(validPoint(newX,newY,m,n) && board[newX][newY]==word[0] && !visited[newX][newY]){
+                wordSearchRecur(board,word.substr(1),newX,newY,X,Y,m,n,exists,visited);
+            }
+        }
+        
+        visited[X][Y] = false; //Backtrack
+        
+        return;
+    }
+    
+    
+    
+    bool exist(vector<vector<char>>& board, string word) {
+        
+        bool exists = false;
+        
+        int m = board.size();
+        int n = board[0].size();
+        
+        vector<vector<bool>> visited(m,vector<bool>(n,false));
+        
+        bool flag = false;
+        
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(!visited[i][j] && board[i][j]==word[0])
+                {
+                    wordSearchRecur(board,word.substr(1),i,j,-1,-1,m,n,exists,visited);
+                    if(exists){
+                        flag = true;
+                        break;
+                    }
+                }
+            }
+            if(flag){
+                break;
+            }
+        }
+        
+        return exists;
+    }
+};
