@@ -29,3 +29,53 @@ public:
         return finalResult;
     }
 };
+     
+     (OR)
+
+#include <vector>
+
+void printSubsetHelper(vector<int> nums,vector<int> &Output)
+{
+    //Base case
+    if(nums.size()==0){
+        for(int i=0;i<Output.size();i++){
+            cout<<Output[i]<<" ";
+        }
+        cout<<"\n";
+        
+        return;
+    }
+    
+    vector<int> Output1 = Output;
+    vector<int> Output2 = Output;
+    
+    Output1.push_back(nums[0]);
+    
+    nums.erase(nums.begin()+0);
+    
+    printSubsetHelper(nums,Output1);
+    printSubsetHelper(nums,Output2);
+    
+    return;
+}
+
+
+
+void printSubsetsOfArray(int input[], int size) {
+	// Write your code here
+    
+    vector<int> nums;
+    
+    for(int i=0;i<size;i++){
+        nums.push_back(input[i]);
+    }
+    
+    vector<int> Output;
+    
+    printSubsetHelper(nums,Output);
+    
+    return;
+}
+
+
+
