@@ -1,0 +1,92 @@
+// Online C++ compiler to run C++ program online
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int calculateSum(vector<int> output)
+{
+    //Base case
+    if(output.size()==0){
+        return 0;
+    }
+    
+    int firstEle = output[0];
+    output.erase(output.begin()+0);
+    
+    
+    int partialSum = calculateSum(output);
+    
+    return firstEle + partialSum;
+}
+
+void subsetSumToKHelper(vector<int> input,vector<int> &Output,vector<vector<int>> &kSubsets,int k)
+{
+    //Base Case
+    if(input.size()==0)
+    {
+        int sum = calculateSum(Output);
+        
+        if(sum==k){
+            kSubsets.push_back(Output);
+        }
+        
+        return;
+    }
+    
+    vector<int> Output1 = Output;
+    vector<int> Output2 = Output;
+    
+    Output1.push_back(input[0]);
+    
+    input.erase(input.begin()+0);
+    
+    
+    subsetSumToKHelper(input,Output1,kSubsets,k);
+    subsetSumToKHelper(input,Output2,kSubsets,k);
+    
+    return;
+}
+
+
+
+void subsetSumToK(int input[],int n, int k) {
+    // Write your code here
+    
+    vector<vector<int>> kSubsets;
+    vector<int> subset;
+    
+    vector<int> Input;
+    for(int i=0;i<n;i++){
+        Input.push_back(input[i]);
+    }
+    
+    subsetSumToKHelper(Input,subset,kSubsets,k);
+    
+    for(int i=0;i<kSubsets.size();i++){
+        for(int j=0;j<kSubsets[i].size();j++){
+            cout<<kSubsets[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    
+    return;
+}
+
+
+int main() {
+    // Write C++ code here
+    
+    int input[20],length,k;
+    
+    cin >> length;
+    
+    for(int i=0; i < length; i++)
+        cin >> input[i];
+
+    cin >> k;
+  
+    subsetSumToK(input, length, k);
+  
+    return 0;
+}
